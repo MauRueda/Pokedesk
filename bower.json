@@ -1,0 +1,11 @@
+{
+  "name": "app-col-challenge-january",
+  "version": "0.1.0",
+  "dependencies": {
+    "cells-template-paper-drawer-panel": "^11.0.0",
+    "web-component-tester":"6.6.0-pre.5"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}

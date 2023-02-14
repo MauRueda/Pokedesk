@@ -1,0 +1,53 @@
+{
+  "layout": {
+    "columns": [{
+      "expand": 100,
+      "rows": [{
+        "expand": 10,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__header",
+          "desc": "Header area"
+        }]
+      }, {
+        "expand": 70,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__main",
+          "desc": "Main area"
+        }]
+      }, {
+        "expand": 10,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__footer",
+          "desc": "Footer area"
+        }]
+      }, {
+        "expand": 5,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__transactional",
+          "desc": "Transactional area"
+        }]
+      }, {
+        "expand": 5,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__overlay",
+          "desc": "Overlay area"
+        }]
+      }]
+    }, {
+      "expand": 100,
+      "rows": [{
+        "expand": 100,
+        "zones": [{
+          "expand": 100,
+          "zone": "app__complementary",
+          "desc": "Complementary area"
+        }]
+      }]
+    }]
+  }
+}

@@ -1,0 +1,55 @@
+<link rel="import"
+  href="../../polymer/polymer.html">
+<link rel="import"
+  href="../../cells-template-paper-drawer-panel/cells-template-paper-drawer-panel.html">
+
+<dom-module id="fake-page">
+  <template>
+    <style>
+      :host {
+        font-family: sans-serif;
+        overflow-x: hidden;
+      }
+
+      cells-template-paper-drawer-panel {
+        --cells-template-paper-drawer-panel-section-bg: #237ABA;
+        background: #237ABA;
+      }
+
+      .btn {
+        font: inherit;
+        font-size: 15px;
+        color: #fff;
+        background-color: #004481;
+        border-radius: 1px;
+        border: 0;
+        padding: 15px 30px;
+        min-width: 180px;
+        cursor: pointer;
+        transform: translate(40px,20px);
+      }
+    </style>
+
+    <cells-template-paper-drawer-panel animation-type="horizontal"
+      mode="seamed">
+      <div slot="app__main"
+        data-select="app__main">
+        <button class="btn"
+          on-click="goTo">Back to page 1</button>
+      </div>
+    </cells-template-paper-drawer-panel>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'fake-page',
+        goTo: function() {
+          this.dispatchEvent(new Event('button-click'));
+        }
+      });
+    }());
+  </script>
+</dom-module>

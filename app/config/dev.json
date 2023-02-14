@@ -1,0 +1,24 @@
+{
+  "cells_properties": {
+    "deployEndpoint": "",
+    "i18nPath": "locales/",
+    "componentsPath": "./components/",
+    "composerEndpoint": "./composerMocks/",
+    "pages": [],
+    "pagesPath": "./pages/",
+    "appId": "",
+    "debug": true,
+    "mocks": true,
+    "coreCache": true,
+    "routerLog": false,
+    "cordovaScript" : "cordova.js",
+    "prplLevel": 1,
+    "initialBundle": ["login.json"],
+    "transpile": true,
+    "transpileExclude": [ "cells-rxjs", "moment", "d3", "bgadp*" ],
+    "enableLitElement": false
+  },
+  "app_properties": {
+
+  }
+}

@@ -1,0 +1,9 @@
+[{
+    "request": {
+        "url": "/foobar-example",
+        "method": "GET"
+    },
+    "response": {
+        "file": "foobar-fixture.json"
+    }
+}]

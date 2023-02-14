@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../cells-template-paper-drawer-panel.html">
+</head>
+
+<body>
+
+  <test-fixture id="default">
+    <template>
+      <cells-template-paper-drawer-panel>
+        <div slot="app__header">
+          Header
+        </div>
+        <div slot="app__main">
+          content
+        </div>
+        <div slot="app__complementary">
+          complementary
+        </div>
+      </cells-template-paper-drawer-panel>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('<cells-template-paper-drawer-panel>', function() {
+      var myEl;
+
+      setup(function() {
+        myEl = fixture('default');
+        myEl.set('disableScrollLock', false);
+      });
+
+      suite('toggleMenu', function() {
+        test('toggleMenu should called when toggle-menu event is fired', function(done) {
+          var spy = sinon.spy();
+          myEl.addEventListener('toggle-menu', spy);
+          myEl.dispatchEvent(new CustomEvent('toggle-menu', {
+            bubbles: true,
+            composed: true
+          }));
+          flush(function() {
+            assert.isTrue(spy.calledOnce);
+            done();
+          });
+        });
+        test('If toggleMenu is fire, cells-app-drawer selected must be drawer', function(done) {
+          let container = myEl.$['app-container'];
+          myEl.toggleMenu();
+          flush(function() {
+            assert.equal(container.selected, 'drawer');
+            done();
+          })
+        });
+      });
+
+      suite('overflow', function() {
+        test('_addOverflow should called when overlay-opening event is fired', function(done) {
+          var spy = sinon.spy();
+          myEl.addEventListener('overlay-opening', spy);
+          myEl.dispatchEvent(new CustomEvent('overlay-opening', {
+            bubbles: true,
+            composed: true
+          }));
+          flush(function() {
+            assert.isTrue(spy.calledOnce);
+            done();
+          });
+        });
+        test('Component must have class `overflow-initial` when overlay-closed event is fired', function(done) {
+          myEl.dispatchEvent(new CustomEvent('overlay-opening', {
+            bubbles: true,
+            composed: true
+          }));
+          flush(function() {
+            assert.isTrue(myEl.classList.contains('overflow-initial'));
+            done();
+          });
+        });
+        test('_addOverflow should called when overlay-closed event is fired', function(done) {
+          var spy = sinon.spy();
+          myEl.addEventListener('overlay-closed', spy);
+          myEl.dispatchEvent(new CustomEvent('overlay-closed', {
+            bubbles: true,
+            composed: true
+          }));
+          flush(function() {
+            assert.isTrue(spy.calledOnce);
+            done();
+          });
+        });
+        test('Component must not have class `custom-transition` when overlay-closed event is fired', function(done) {
+          myEl.dispatchEvent(new CustomEvent('overlay-closed', {
+            bubbles: true,
+            composed: true
+          }));
+          flush(function() {
+            assert.isFalse(myEl.classList.contains('custom-transition'));
+            done();
+          });
+        });
+      });
+
+      suite('layerScroll', function() {
+        test('_resetLayerScroll should called template-cached is fired', function(done) {
+          var spy = sinon.spy();
+          myEl.addEventListener('template-cached', spy);
+          myEl.dispatchEvent(new CustomEvent('template-cached', {
+            bubbles: true,
+            composed: true
+          }));
+          flush(function() {
+            assert.isTrue(spy.calledOnce);
+            done();
+          });
+        });
+        test('If template-cached is fired, scrolltop must be true', function(done) {
+          var section = myEl.$.app__section;
+          myEl.dispatchEvent(new CustomEvent('template-cached', {
+            bubbles: true,
+            composed: true
+          }));
+          flush(function() {
+            assert.equal(section.scrollTop, 0);
+            done();
+          });
+        });
+      });
+
+      suite('changeAnimation', function() {
+        test('_onChangeAnimation should been called when change-template-animation is fired', function(done) {
+          var spy = sinon.spy();
+          myEl.addEventListener('change-template-animation', spy);
+          myEl.dispatchEvent(new CustomEvent('change-template-animation', {
+            bubbles: true,
+            composed: true,
+            detail: { animationType: 'staticEver' }
+          }));
+          flush(function() {
+            assert.isTrue(spy.calledOnce);
+            assert.equal(myEl.animationType, 'staticEver');
+            done();
+          });
+        });
+      });
+
+      suite('contentScroll', function() {
+        test('_onContentScroll should been called when content-scroll is fired', function(done) {
+          var spy = sinon.spy();
+          var scrollHeader = Polymer.Element ? myEl.shadowRoot.querySelector('cells-paper-scroll-header-panel') : Polymer.dom(myEl.root).querySelector('cells-paper-scroll-header-panel');
+          myEl.addEventListener('change-template-animation', spy);
+          scrollHeader.dispatchEvent(new CustomEvent('change-template-animation', {
+            bubbles: true,
+            composed: true,
+            detail: { target: scrollHeader.scroller }
+          }));
+          flush(function() {
+            assert.isTrue(spy.calledOnce);
+            done();
+          });
+        });
+      });
+      suite('_setupFooter method', function() {
+
+        test('if has footer should listen paper-header-transform when not is fixed', function() {
+          let listener = sinon.stub(myEl, '_onHeaderTransform', () => { });
+          myEl._setupFooter(true, false);
+          myEl.$.app__section.dispatchEvent(new CustomEvent('paper-header-transform', { bubbles: true, composed: true }));
+          expect(listener).to.have.been.called;
+        });
+
+        test('if not has footer should not listen paper-header-transform', function() {
+          let listener = sinon.stub(myEl, '_onHeaderTransform', () => { });
+          myEl._setupFooter(false, true);
+          myEl.$.app__section.dispatchEvent(new CustomEvent('paper-header-transform', { bubbles: true, composed: true }));
+          expect(listener).not.have.been.called;
+        });
+        test('_onHeaderTransform should be execute with footerHeight', function() {
+          let transformSpy = sinon.spy(myEl, 'transform');
+
+          sinon.stub(myEl, '_updateFooterHeight', () => { });
+          myEl.set('footerHeight', 1);
+          myEl._onHeaderTransform({ detail: { y: 1 } });
+
+          expect(transformSpy).not.to.have.been.called;
+        });
+
+        test('_onHeaderTransform should be execute with footerHeight empty', function() {
+          let transformSpy = sinon.spy(myEl, 'transform');
+
+          myEl.set('footerHeight', null);
+          myEl._onHeaderTransform({ detail: { y: 1 } });
+
+          expect(myEl._footer).to.be.ok;
+          expect(transformSpy).to.have.been.called;
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

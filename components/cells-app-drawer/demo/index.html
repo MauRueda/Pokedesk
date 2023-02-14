@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+
+<head>
+  <title>cells-app-drawer demo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../paper-styles/demo-pages.html">
+  <link rel="import" href="../../paper-button/paper-button.html">
+  <link rel="import" href="../../cells-demo-helper/cells-demo-helper.html">
+  <link rel="import" href="../../cells-component-app-header/cells-component-app-header.html">
+  <link rel="import" href="../../cells-organism-menu-sidebar/cells-organism-menu-sidebar.html">
+  <link rel="import" href="../../cells-login-view/cells-login-view.html">
+  <link rel="import" href="../../coronita-icons/coronita-icons.html">
+  <link rel="import" href="../cells-app-drawer.html">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body unresolved="">
+
+  <cells-demo-helper>
+    <cells-demo-case heading="Basic" description="You can click in left button header or swipe from the edge to show the efect of cells-app-drawer">
+      <template>
+        <dom-bind>
+          <template is="dom-bind" id="demo">
+            <cells-app-drawer id="paperDrawerPanel">
+              <div slot="drawer">
+                <cells-organism-menu-sidebar icon-logout-id="coronita:on" available-sections="[[sections]]"></cells-organism-menu-sidebar>
+              </div>
+              <div slot="main">
+                <cells-component-app-header text="Hello John" icon-left="menu"></cells-component-app-header>
+                  <cells-login-view id="login" clear-id-icon="coronita:close" clear-pwd-icon="coronita:close"
+                  toggle-pwd-icon="coronita:visualize" toggle-pwd-icon-toggled="coronita:hide"
+                  start-icon="coronita:lock" end-icon="coronita:unlock" header-image="http://bbva-files.s3.amazonaws.com/cells/assets/glomo/images/access/bg-login.jpg">
+                  </cells-login-view>
+              </div>
+            </cells-app-drawer>
+            <script>
+              document.addEventListener('WebComponentsReady', function() {
+                var demo = document.querySelector(Polymer.Element ? 'dom-bind' : '#demo');
+                var toggle = false;
+
+                demo.$.paperDrawerPanel.addEventListener('left-button-pressed', function() {
+                  if (!toggle) {
+                    demo.$.paperDrawerPanel.openDrawer();
+                  } else {
+                    demo.$.paperDrawerPanel.closeDrawer();
+                  }
+                  toggle = !toggle;
+                });
+
+                demo.sections = [{
+                  label: 'Ajustes',
+                  icon: 'coronita:settings',
+                  show: false
+                },
+                {
+                  label: 'Aplicaciones',
+                  icon: 'coronita:titleview',
+                  show: false
+                },
+                {
+                  label: 'login',
+                  icon: 'coronita:info',
+                  action: 'login-event',
+                  show: true
+                }
+                ];
+              });
+            </script>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="Basic right" description="You can swipe from the right edge to show the efect of cells-app-drawer">
+      <template>
+        <dom-bind>
+          <template is="dom-bind" id="demo">
+            <cells-app-drawer id="paperDrawerPanel" right-drawer>
+              <div slot="drawer">
+                <cells-organism-menu-sidebar icon-logout-id="coronita:on" available-sections="[[sections]]"></cells-organism-menu-sidebar>
+              </div>
+              <div slot="main">
+                <cells-component-app-header text="Hello John" icon-left="menu"></cells-component-app-header>
+                <cells-login-view id="login" clear-id-icon="coronita:close" clear-pwd-icon="coronita:close"
+                toggle-pwd-icon="coronita:visualize" toggle-pwd-icon-toggled="coronita:hide"
+                start-icon="coronita:lock" end-icon="coronita:unlock" header-image="http://bbva-files.s3.amazonaws.com/cells/assets/glomo/images/access/bg-login.jpg"></cells-login-view>
+              </div>
+            </cells-app-drawer>
+            <script>
+              document.addEventListener('WebComponentsReady', function() {
+                var demo = document.querySelector(Polymer.Element ? 'dom-bind' : '#demo');
+                var toggle = false;
+                demo.$.paperDrawerPanel.addEventListener('left-button-pressed', function() {
+                  if (!toggle) {
+                    demo.$.paperDrawerPanel.openDrawer();
+                  } else {
+                    demo.$.paperDrawerPanel.closeDrawer();
+                  }
+                  toggle = !toggle;
+                });
+                demo.sections = [{
+                  label: 'Ajustes',
+                  icon: 'coronita:settings',
+                  show: false
+                },
+                {
+                  label: 'Aplicaciones',
+                  icon: 'coronita:titleview',
+                  show: false
+                },
+                {
+                  label: 'login',
+                  icon: 'coronita:info',
+                  action: 'login-event',
+                  show: true
+                }
+                ];
+              });
+            </script>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="Scale content" description="You can click in left button header or swipe from the edge to show the efect of cells-app-drawer scaling transition">
+      <template>
+        <dom-bind>
+          <template is="dom-bind" id="demo">
+            <cells-app-drawer id="paperDrawerPanel" scale-content>
+              <div slot="drawer">
+                <cells-organism-menu-sidebar icon-logout-id="coronita:on" available-sections="[[sections]]"></cells-organism-menu-sidebar>
+              </div>
+              <div slot="main">
+                <cells-component-app-header text="Hello John" icon-left="menu"></cells-component-app-header>
+                <cells-login-view id="login" clear-id-icon="coronita:close" clear-pwd-icon="coronita:close" toggle-pwd-icon="coronita:visualize"
+                  toggle-pwd-icon-toggled="coronita:hide" start-icon="coronita:lock" end-icon="coronita:unlock" header-image="http://bbva-files.s3.amazonaws.com/cells/assets/glomo/images/access/bg-login.jpg"></cells-login-view>
+              </div>
+            </cells-app-drawer>
+            <script>
+              document.addEventListener('WebComponentsReady', function() {
+                var demo = document.querySelector(Polymer.Element ? 'dom-bind' : '#demo');
+                var toggle = false;
+
+                demo.$.paperDrawerPanel.addEventListener('left-button-pressed', function() {
+                  if (!toggle) {
+                    demo.$.paperDrawerPanel.openDrawer();
+                  } else {
+                    demo.$.paperDrawerPanel.closeDrawer();
+                  }
+                  toggle = !toggle;
+                });
+                demo.sections = [{
+                  label: 'Ajustes',
+                  icon: 'coronita:settings',
+                  show: false
+                },
+                {
+                  label: 'Aplicaciones',
+                  icon: 'coronita:titleview',
+                  show: false
+                },
+                {
+                  label: 'login',
+                  icon: 'coronita:info',
+                  action: 'login-event',
+                  show: true
+                }
+                ];
+              });
+            </script>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="Peeking" description="You can click on the left side (in a number of pixels defined by edgeSwipeSensitivity) or swipe from the edge to show the efect of cells-app-drawer">
+      <template>
+        <dom-bind>
+          <template is="dom-bind" id="demo">
+            <cells-app-drawer id="paperDrawerPanel" peek>
+              <div slot="drawer">
+                <cells-organism-menu-sidebar icon-logout-id="coronita:on" available-sections="[[sections]]"></cells-organism-menu-sidebar>
+              </div>
+              <div slot="main">
+                <cells-component-app-header text="Hello John" icon-left="menu"></cells-component-app-header>
+                <cells-login-view id="login" clear-id-icon="coronita:close" clear-pwd-icon="coronita:close" toggle-pwd-icon="coronita:visualize"
+                  toggle-pwd-icon-toggled="coronita:hide" start-icon="coronita:lock" end-icon="coronita:unlock" header-image="http://bbva-files.s3.amazonaws.com/cells/assets/glomo/images/access/bg-login.jpg"></cells-login-view>
+              </div>
+            </cells-app-drawer>
+            <script>
+              document.addEventListener('WebComponentsReady', function() {
+                var demo = document.querySelector(Polymer.Element ? 'dom-bind' : '#demo');
+                var toggle = false;
+
+                demo.$.paperDrawerPanel.addEventListener('left-button-pressed', function() {
+                  if (!toggle) {
+                    demo.$.paperDrawerPanel.openDrawer();
+                  } else {
+                    demo.$.paperDrawerPanel.closeDrawer();
+                  }
+                  toggle = !toggle;
+                });
+                demo.sections = [{
+                  label: 'Ajustes',
+                  icon: 'coronita:settings',
+                  show: false
+                },
+                {
+                  label: 'Aplicaciones',
+                  icon: 'coronita:titleview',
+                  show: false
+                },
+                {
+                  label: 'login',
+                  icon: 'coronita:info',
+                  action: 'login-event',
+                  show: true
+                }
+                ];
+              });
+            </script>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+  </cells-demo-helper>
+
+
+
+
+
+</body>
+
+</html>
