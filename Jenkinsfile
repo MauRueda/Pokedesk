@@ -26,7 +26,7 @@ pipeline {
 
                         entrypointParams = [
                             type            : "cellsApp",
-                            buildConfigs    : [config1:[config:'dev', build:'novulcanize']],
+                            buildConfigs    : [config1:[config:'dev.js', build:'novulcanize']],
                             deployS3        : true
                         ]
                     }
