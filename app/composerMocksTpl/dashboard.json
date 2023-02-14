@@ -23,6 +23,27 @@
         "icon-left-primary": "bbva:return",
         "text": "Poke list"
       }
+    },
+    {
+      "zone": "app__main",
+      "type": "DM",
+      "familyPath": "../pokemons-dm",
+      "tag": "pokemons-dm",
+      "render": "litElement",
+      "properties": {
+        "cellsConnections": {
+          "in": {
+            "list-pagination": {
+              "bind": "getPage"
+            }
+          },
+          "out": {
+            "result-list": {
+              "bind": "firstData-event"
+            }
+          }
+        }
+      }
     }
   ]
 }

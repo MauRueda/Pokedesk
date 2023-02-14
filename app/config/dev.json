@@ -5,7 +5,7 @@
     "componentsPath": "./components/",
     "composerEndpoint": "./composerMocks/",
     "pages": [],
-    "pagesPath": "./pages/",
+    "pagesPath": "./elements/",
     "appId": "",
     "debug": true,
     "mocks": true,
