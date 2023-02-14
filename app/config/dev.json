@@ -11,14 +11,31 @@
     "mocks": true,
     "coreCache": true,
     "routerLog": false,
-    "cordovaScript" : "cordova.js",
+    "cordovaScript": "cordova.js",
     "prplLevel": 1,
-    "initialBundle": ["login.json"],
+    "initialBundle": [
+      "dashboard.json"
+    ],
     "transpile": true,
-    "transpileExclude": [ "cells-rxjs", "moment", "d3", "bgadp*" ],
-    "enableLitElement": false
+    "transpileExclude": [
+      "cells-rxjs",
+      "moment",
+      "d3",
+      "bgadp*"
+    ],
+    "enableLitElement": true,
+    "onlyLitElements": true,
+    "locales": {
+      "languages": [
+        "es-ES",
+        "en-US",
+        "es"
+      ],
+      "intlInputFileNames": [
+        "locales"
+      ],
+      "intlFileName": "locales"
+    }
   },
-  "app_properties": {
-
-  }
+  "app_properties": {}
 }

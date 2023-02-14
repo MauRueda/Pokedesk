@@ -1,11 +1,11 @@
-(function(document) {
-  'use strict';
+(
+  function () {
+    'use strict';
 
-  window.CellsPolymer.start({
-    routes: {
-      'login': '/',
-      'another': '/another',
-      'routerExample': '/routerExample/:queryStringToPrettyUrl'
-    }
-  });
-}(document));
+    window.CellsPolymer.start({
+      routes: {
+        'dashboard': '/',
+      }
+    });
+  }()
+);
