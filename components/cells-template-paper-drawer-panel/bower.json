@@ -1,0 +1,32 @@
+{
+  "name": "cells-template-paper-drawer-panel",
+  "version": "11.0.4",
+  "description": "Template with Polymer paper drawer panel",
+  "keywords": [
+    "template",
+    "pape-scroll-header-panel",
+    "paper-drawer-panel",
+    "one column",
+    "animation-behavior",
+    "polymer",
+    "spec"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^2.0.0",
+    "cells-app-drawer": "^11.0.0",
+    "cells-paper-scroll-header-panel": "^11.0.0",
+    "cells-template-animation-behavior": "^11.0.0"
+  },
+  "devDependencies": {
+    "cells-sass": "^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
+    "cells-demo-helper": "^10.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^1.0"
+  },
+  "main": "cells-template-paper-drawer-panel.html"
+}

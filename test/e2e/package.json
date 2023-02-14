@@ -1,0 +1,28 @@
+{
+  "name": "app-col-challenge-january.e2e",
+  "version": "0.1.0",
+  "description": "Application level End 2 End testing for app-col-challenge-january",
+  "keywords": [
+    "cells-e2e-tests"
+  ],
+  "scripts": {
+    "test": "./node_modules/@cells-pepino/cli/bin/cli.js -c ./config/browser.js",
+    "test:vbank": "./node_modules/@cells-pepino/cli/bin/cli.js -c ./config/browser.vbank.js"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.17.12",
+    "@cells-pepino/cli": "2.0.0",
+    "@testing/acis-v6": "^2.2.5",
+    "@testing/wdio-page-objects-async": "^2.2.5",
+    "@wdio/axe-service": "^2.0.0",
+    "chai": "^4.3.6",
+    "fibers": "^5.0.1",
+    "ts-node": "^10.8.1",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.7.3"
+  },
+  "engines": {
+    "npm": "please-use-yarn",
+    "yarn": ">= 1.19.1"
+  }
+}

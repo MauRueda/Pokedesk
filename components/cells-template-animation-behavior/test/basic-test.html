@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../cells-template-animation-behavior.html">
+  <link rel="import" href="../../cells-template-paper-drawer-panel/cells-template-paper-drawer-panel.html">
+</head>
+
+<body>
+  <test-fixture id="default">
+    <template>
+      <cells-template-paper-drawer-panel id="tplOne" name="tplOne"></cells-template-paper-drawer-panel>
+      <cells-template-paper-drawer-panel id="tplTwo" name="tplTwo" state="inactive"></cells-template-paper-drawer-panel>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('cells-template-animation-behavior', function() {
+      var el;
+      var tplOne;
+      var otherTpl;
+      var navigate;
+
+      setup(function() {
+        el = fixture('default');
+        tplOne = Polymer.dom(el.root).querySelector('#tplOne');
+        otherTpl = Polymer.dom(el.root).querySelector('#tplTwo');
+
+        navigate = function(tplFrom, tplTo) {
+          tplFrom.setAttribute('state', 'inactive');
+          tplTo.setAttribute('state', 'active');
+        };
+      });
+
+      suite('State', function() {
+        test('setting state to active animates the inactive sibling template', function() {
+          var siblingTplIsAnimating = otherTpl.classList.contains('template-animation-is-animating');
+          tplOne.setAttribute('state', 'active');
+          assert.notEqual(otherTpl.classList.contains('template-animation-is-animating'), siblingTplIsAnimating);
+          assert.isTrue(otherTpl.classList.contains('template-animation-is-animating'));
+        });
+
+        test('setting state to active adds "state-is-visible" class if there is no inactive sibling template', function(done) {
+          var initialClass = otherTpl.classList.contains('state-is-visible');
+          otherTpl.setAttribute('state', 'active');
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              assert.notEqual(otherTpl.classList.contains('state-is-visible'), initialClass);
+              assert.isTrue(otherTpl.classList.contains('state-is-visible'));
+              done();
+            });
+          });
+        });
+
+        test('active template has aria-hidden attribute set to false', function() {
+          navigate(tplOne, otherTpl);
+          tplOne.addEventListener('template-active', function() {
+            assert.equal(otherTpl.getAttribute('aria-hidden'), 'false');
+            assert.equal(tplOne.getAttribute('aria-hidden'), 'true');
+
+          });
+        });
+      });
+
+      suite('Animation types', function() {
+        suite('horizontal', function() {
+          setup(function() {
+            navigate(tplOne, otherTpl);
+          });
+
+          test('outgoing and incoming templates moves to left in forwards direction', function(done) {
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveFromRight'));
+              assert.isTrue(tplOne.classList.contains('template-animation-moveToLeft'));
+              done();
+            });
+          });
+
+          test('outgoing and incoming templates moves to right in backwards direction', function(done) {
+            navigate(otherTpl, tplOne);
+            otherTpl.addEventListener('animation-backward', function() {
+              assert.isTrue(tplOne.classList.contains('template-animation-moveFromLeft'));
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveToRight'));
+              done();
+            });
+          });
+        });
+
+        suite('verticalDownForwards', function() {
+          setup(function() {
+            tplOne.animationType = 'verticalDownForwards';
+            otherTpl.animationType = 'horizontal';
+            navigate(tplOne, otherTpl);
+          });
+
+          test('outgoing template moves to bottom in forwards direction', function(done) {
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-static'));
+              assert.isTrue(tplOne.classList.contains('template-animation-moveToBottom'));
+              done();
+            });
+          });
+
+          test('outgoing and incoming templates moves to right in backwards direction', function(done) {
+            navigate(otherTpl, tplOne);
+            otherTpl.addEventListener('animation-backward', function() {
+              assert.isTrue(tplOne.classList.contains('template-animation-moveFromLeft'));
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveToRight'));
+              done();
+            });
+          });
+        });
+
+        suite('verticalDownBackwards', function() {
+          setup(function() {
+            tplOne.animationType = 'horizontal';
+            otherTpl.animationType = 'verticalDownBackwards';
+            navigate(tplOne, otherTpl);
+          });
+
+          test('outgoing and incoming templates moves to left in forwards direction', function(done) {
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveFromRight'));
+              assert.isTrue(tplOne.classList.contains('template-animation-moveToLeft'));
+              done();
+            });
+          });
+
+          test('outgoing template moves to bottom in backwards direction', function(done) {
+            navigate(otherTpl, tplOne);
+            otherTpl.addEventListener('animation-backward', function() {
+              assert.isTrue(tplOne.classList.contains('template-animation-static'));
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveToBottom'));
+              done();
+            });
+          });
+        });
+
+        suite('verticalUp', function() {
+          setup(function() {
+            tplOne.animationType = 'static';
+            otherTpl.animationType = 'verticalUp';
+            navigate(tplOne, otherTpl);
+          });
+
+          test('incoming template moves from bottom to top while outgoing remains static in forwards direction', function(done) {
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveFromBottom'));
+              assert.isTrue(tplOne.classList.contains('template-animation-static'));
+              done();
+            });
+          });
+
+          test('outgoing template moves to bottom while incoming template remains static in backwards direction', function(done) {
+            navigate(otherTpl, tplOne);
+            otherTpl.addEventListener('animation-backward', function() {
+              assert.isTrue(tplOne.classList.contains('template-animation-static'));
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveToBottom'));
+              done();
+            });
+          });
+        });
+
+        suite('staticEver', function() {
+          setup(function() {
+            tplOne.animationType = 'staticEver';
+            otherTpl.animationType = 'staticEver';
+            navigate(tplOne, otherTpl);
+          });
+
+          test('both templates remains static (no animation) in forwards direction', function(done) {
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-static'));
+              assert.isTrue(tplOne.classList.contains('template-animation-static'));
+              done();
+            });
+          });
+
+          test('both templates remains static (no animation) in backwards direction', function(done) {
+            navigate(otherTpl, tplOne);
+            otherTpl.addEventListener('animation-backward', function() {
+              assert.isTrue(tplOne.classList.contains('template-animation-static'));
+              assert.isTrue(otherTpl.classList.contains('template-animation-static'));
+              done();
+            });
+          });
+        });
+
+        suite('horizontalEver', function() {
+          setup(function() {
+            tplOne.animationType = 'static';
+            otherTpl.animationType = 'horizontalEver';
+            navigate(tplOne, otherTpl);
+          });
+
+          test('both templates move to left in forwards direction', function(done) {
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveFromRight'));
+              assert.isTrue(tplOne.classList.contains('template-animation-moveToLeft'));
+              done();
+            });
+          });
+
+          test('outgoing and incoming templates moves to right in backwards direction', function(done) {
+            navigate(otherTpl, tplOne);
+            otherTpl.addEventListener('animation-backward', function() {
+              assert.isTrue(tplOne.classList.contains('template-animation-moveFromLeft'));
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveToRight'));
+              done();
+            });
+          });
+        });
+
+        suite('fade', function() {
+          setup(function() {
+            tplOne.animationType = 'fade';
+            otherTpl.animationType = 'fade';
+            navigate(tplOne, otherTpl);
+          });
+
+          test('both templates animation with fade', function(done) {
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-fade-in'));
+              assert.isTrue(tplOne.classList.contains('template-animation-fade-out'));
+              done();
+            });
+          });
+
+          test('both templates animation with fade', function(done) {
+            navigate(otherTpl, tplOne);
+            otherTpl.addEventListener('animation-backward', function() {
+              assert.isTrue(tplOne.classList.contains('template-animation-fade-out'));
+              assert.isTrue(otherTpl.classList.contains('template-animation-fade-in'));
+              done();
+            });
+          });
+        });
+
+        suite('default animation', function() {
+          setup(function() {
+            navigate(tplOne, otherTpl);
+          });
+
+          test('animation is horizontal if the animationType of both templates does not match any known value', function(done) {
+            tplOne.animationType = 'any';
+            otherTpl.animationType = 'any';
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveFromRight'));
+              assert.isTrue(tplOne.classList.contains('template-animation-moveToLeft'));
+              done();
+            });
+          });
+
+          test('animation is horizontal if the animationType of the outgoing template does not match any known value', function(done) {
+            tplOne.animationType = 'any';
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveFromRight'));
+              assert.isTrue(tplOne.classList.contains('template-animation-moveToLeft'));
+              done();
+            });
+          });
+
+          test('animation is horizontal if the animationType of the incoming template does not match any known value', function(done) {
+            otherTpl.animationType = 'any';
+            tplOne.addEventListener('animation-forward', function() {
+              assert.isTrue(otherTpl.classList.contains('template-animation-moveFromRight'));
+              assert.isTrue(tplOne.classList.contains('template-animation-moveToLeft'));
+              done();
+            });
+          });
+        });
+      });
+
+      suite('Events', function() {
+        setup(function() {
+          navigate(tplOne, otherTpl);
+        });
+
+        test('incoming templates fires "template-active" event when it becomes visible', function() {
+          otherTpl.addEventListener('template-active', function(e) {
+            assert.isTrue(e.target.classList.contains('state-is-visible'));
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

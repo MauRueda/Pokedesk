@@ -1,0 +1,23 @@
+{
+  "name": "app-col-challenge-january",
+  "short_name": "app-col-challenge-januaryt",
+  "icons": [{
+        "src": "resources/images/touch/icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }, {
+        "src": "resources/images/touch/icon-144x144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      }, {
+        "src": "resources/images/touch/ms-touch-icon-144x144-precomposed.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      }, {
+        "src": "resources/images/touch/icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }],
+  "start_url": "/#!/",
+  "display": "standalone"
+}

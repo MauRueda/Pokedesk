@@ -1,0 +1,11 @@
+{
+  "name": "app-col-challenge-january",
+  "version": "0.1.0",
+  "keywords": [
+    "cells-app"
+  ],
+  "dependencies": {
+    "@cells/cells-bridge": "^3.8.0",
+    "cells-app-template": "^3.1.0"
+  }
+}

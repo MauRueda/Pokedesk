@@ -1,0 +1,45 @@
+{
+  "name": "cells-app-drawer",
+  "version": "11.2.1",
+  "description": "A responsive drawer panel",
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "drawer",
+    "responsive",
+    "layout"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/cells-app-drawer.git"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/PolymerElements/cells-app-drawer",
+  "dependencies": {
+    "iron-media-query": "PolymerElements/iron-media-query#^2.0.0",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#^2.0.0",
+    "iron-selector": "PolymerElements/iron-selector#^2.0.0",
+    "polymer": "Polymer/polymer#^2.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
+    "paper-button": "PolymerElements/paper-button#^2.0.0",
+    "paper-styles": "PolymerElements/paper-styles#^2.0.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#^2.0.0",
+    "web-component-tester": "^6.0.0",
+    "cells-demo-helper": "^10.0.0",
+    "cells-component-app-header": "^10.0.0",
+    "cells-organism-menu-sidebar": "^10.0.0",
+    "cells-login-view": "^11.0.0",
+    "coronita-icons": "^10.0.0"
+  },
+  "main": "cells-app-drawer.html",
+  "ignore": [],
+  "resolutions": {
+    "polymer": "^2.0.0",
+    "cells-i18n-behavior": "^13.0.0"
+  }
+}

@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo cells-template-animation-behavior</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script>
+    window.Polymer = {
+      dom: 'shadow',
+      lazyRegister: true,
+      useNativeCSSProperties: true,
+    };
+  </script>
+  <link rel="import" href="../../cells-template-paper-drawer-panel/cells-template-paper-drawer-panel.html">
+  <link rel="import" href="../../cells-demo-helper/cells-demo-helper.html">
+  <link rel="import" href="fake-page.html">
+  <link rel="import" href="css/demo-styles.html">
+</head>
+<body unresolved>
+  <cells-demo-helper multi-toast events='["template-active", "template-cached"]'>
+    <cells-demo-case heading="Horizontal animation (default)">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <cells-template-paper-drawer-panel class="page-1" state="active" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="1" data-from="0">Navigate to page 2</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+
+            <cells-template-paper-drawer-panel class="page-2"  mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="0" data-from="1">Back to page 1</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+        <script>
+          document.addEventListener('WebComponentsReady', function() {
+            var demo = document.querySelector(Polymer.Element ? 'dom-bind' : 'template[is="dom-bind"]');
+            var tpls = document.querySelectorAll('cells-template-paper-drawer-panel');
+            demo.goTo = function(e) {
+              tpls[e.target.dataset.from].setAttribute('state', 'inactive');
+              tpls[e.target.dataset.to].setAttribute('state', 'active');
+            };
+          });
+        </script>
+      </template>
+    </cells-demo-case>
+
+    <cells-demo-case heading="Vertical Down Forwards">
+      <template>
+        <style>
+          cells-template-paper-drawer-panel {
+            --cells-template-animation-duration: 320ms;
+            --cells-template-animation-timing-function: cubic-bezier(0.38, 0.1, 0.23, 0.86);
+          }
+        </style>
+        <dom-bind>
+          <template is="dom-bind">
+            <cells-template-paper-drawer-panel class="page-1" state="active" animation-type="verticalDownForwards" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="1" data-from="0">Navigate to page 2</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+
+            <cells-template-paper-drawer-panel class="page-2" animation-type="horizontal" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="0" data-from="1">Back to page 1</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+        <script>
+          document.addEventListener('WebComponentsReady', function() {
+            var demo = document.querySelector(Polymer.Element ? 'dom-bind' : 'template[is="dom-bind"]');
+            var tpls = document.querySelectorAll('cells-template-paper-drawer-panel');
+            demo.goTo = function(e) {
+              tpls[e.target.dataset.from].setAttribute('state', 'inactive');
+              tpls[e.target.dataset.to].setAttribute('state', 'active');
+            };
+          });
+        </script>
+      </template>
+    </cells-demo-case>
+
+    <cells-demo-case heading="Vertical Down Backwards">
+      <template>
+        <style>
+          cells-template-paper-drawer-panel {
+            --cells-template-animation-duration: 320ms;
+            --cells-template-animation-timing-function: cubic-bezier(0.38, 0.1, 0.23, 0.86);
+          }
+        </style>
+        <dom-bind>
+          <template is="dom-bind">
+            <cells-template-paper-drawer-panel class="page-1" state="active" animation-type="horizontal" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="1" data-from="0">Navigate to page 2</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+
+            <cells-template-paper-drawer-panel class="page-2" animation-type="verticalDownBackwards" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="0" data-from="1">Back to page 1</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+        <script>
+          document.addEventListener('WebComponentsReady', function() {
+            var demo = document.querySelector(Polymer.Element ? 'dom-bind' : 'template[is="dom-bind"]');
+            var tpls = document.querySelectorAll('cells-template-paper-drawer-panel');
+            demo.goTo = function(e) {
+              tpls[e.target.dataset.from].setAttribute('state', 'inactive');
+              tpls[e.target.dataset.to].setAttribute('state', 'active');
+            };
+          });
+        </script>
+      </template>
+    </cells-demo-case>
+
+    <cells-demo-case heading="Vertical Up (Modal behavior)">
+      <template>
+        <style>
+          cells-template-paper-drawer-panel {
+            --cells-template-animation-duration: 300ms;
+            --cells-template-animation-timing-function: cubic-bezier(0.38, 0.1, 0.23, 0.86);
+          }
+        </style>
+        <dom-bind>
+          <template is="dom-bind">
+            <cells-template-paper-drawer-panel class="page-1" state="active" animation-type="static" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="1" data-from="0">Navigate to page 2</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+
+            <cells-template-paper-drawer-panel class="page-2" animation-type="verticalUp" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="0" data-from="1">Back to page 1</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+        <script>
+          document.addEventListener('WebComponentsReady', function() {
+            var demo = document.querySelector(Polymer.Element ? 'dom-bind' : 'template[is="dom-bind"]');
+            var tpls = document.querySelectorAll('cells-template-paper-drawer-panel');
+            demo.goTo = function(e) {
+              tpls[e.target.dataset.from].setAttribute('state', 'inactive');
+              tpls[e.target.dataset.to].setAttribute('state', 'active');
+            };
+          });
+        </script>
+      </template>
+    </cells-demo-case>
+
+    <cells-demo-case heading="Static Ever (no animation)">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <cells-template-paper-drawer-panel class="page-1" state="active" animation-type="staticEver" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="1" data-from="0">Navigate to page 2</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+
+            <cells-template-paper-drawer-panel class="page-2" animation-type="staticEver" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="0" data-from="1">Back to page 1</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+        <script>
+          document.addEventListener('WebComponentsReady', function() {
+            var demo = document.querySelector(Polymer.Element ? 'dom-bind' : 'template[is="dom-bind"]');
+            var tpls = document.querySelectorAll('cells-template-paper-drawer-panel');
+            demo.goTo = function(e) {
+              tpls[e.target.dataset.from].setAttribute('state', 'inactive');
+              tpls[e.target.dataset.to].setAttribute('state', 'active');
+            };
+          });
+        </script>
+      </template>
+    </cells-demo-case>
+
+    <cells-demo-case heading="Fade">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <cells-template-paper-drawer-panel class="page-1" state="active" animation-type="fade" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="1" data-from="0">Navigate to page 2</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+
+            <cells-template-paper-drawer-panel class="page-2" animation-type="fade" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="0" data-from="1">Back to page 1</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+        <script>
+          document.addEventListener('WebComponentsReady', function() {
+            var demo = document.querySelector(Polymer.Element ? 'dom-bind' : 'template[is="dom-bind"]');
+            var tpls = document.querySelectorAll('cells-template-paper-drawer-panel');
+            demo.goTo = function(e) {
+              tpls[e.target.dataset.from].setAttribute('state', 'inactive');
+              tpls[e.target.dataset.to].setAttribute('state', 'active');
+            };
+          });
+        </script>
+      </template>
+    </cells-demo-case>
+
+    <cells-demo-case heading="With resetScroll" description="Use &quot;reset-scroll&quot; attribute to reset the scroll of the template after navigating to another page.">
+      <template>
+        <custom-style>
+          <style is="custom-style">
+            [data-select="app__main"] {
+              padding: 0 20px 0;
+            }
+            .btn {
+              margin-bottom: 20px;
+            }
+          </style>
+        </custom-style>
+        <dom-bind>
+          <template is="dom-bind">
+            <cells-template-paper-drawer-panel class="page-1" state="active" mode="seamed" reset-scroll>
+              <div slot="app__main" data-select="app__main">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptatibus temporibus, nobis eaque natus. Quos minus rerum esse molestiae, veniam nesciunt ratione veritatis, obcaecati cum quasi, odit impedit laboriosam adipisci.</p>
+                <button class="btn" on-click="goTo" data-to="1" data-from="0">Navigate to page 2</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+
+            <cells-template-paper-drawer-panel class="page-2" mode="seamed" reset-scroll>
+              <div slot="app__main" data-select="app__main">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam possimus minima velit, optio tenetur rem blanditiis fugit provident sequi animi ratione voluptatum, laboriosam, nobis harum quibusdam quas repudiandae molestiae libero!</p>
+                <button class="btn" on-click="goTo" data-to="0" data-from="1">Back to page 1</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+        <script>
+          document.addEventListener('WebComponentsReady', function() {
+            var demo = document.querySelector(Polymer.Element ? 'dom-bind' : 'template[is="dom-bind"]');
+            var tpls = document.querySelectorAll('cells-template-paper-drawer-panel');
+            demo.goTo = function(e) {
+              tpls[e.target.dataset.from].setAttribute('state', 'inactive');
+              tpls[e.target.dataset.to].setAttribute('state', 'active');
+            };
+          });
+        </script>
+      </template>
+    </cells-demo-case>
+
+    <cells-demo-case heading="Pages">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <cells-template-paper-drawer-panel data-type="template" class="page-1"  animation-type="fade" mode="seamed">
+              <div slot="app__main" data-select="app__main">
+                <button class="btn" on-click="goTo" data-to="1" data-from="0">Navigate to page 2</button>
+              </div>
+            </cells-template-paper-drawer-panel>
+
+            <fake-page
+              data-to="0"
+              data-from="1"
+              on-button-click="goTo"
+              data-type="template">
+            </fake-page>
+          </template>
+        </dom-bind>
+        <script>
+          var getTemplate = function(element) {
+            if (element.tagName.toLowerCase().indexOf('page') === -1) {
+              return element;
+            }
+
+            return Array.from(element.shadowRoot.childNodes).find(function(el) {
+              return el.tagName && el.tagName.toLowerCase().indexOf('cells-template') !== -1;
+            });
+          };
+
+          document.addEventListener('WebComponentsReady', function() {
+            // wait until component has been truly resolved
+            document.querySelector('cells-template-paper-drawer-panel').state = 'active';
+
+            var demo = document.querySelector(Polymer.Element ? 'dom-bind' : 'template[is="dom-bind"]');
+            var tpls = document.querySelectorAll('[data-type="template"]');
+            demo.goTo = function(e) {
+              getTemplate(tpls[e.target.dataset.from]).setAttribute('state', 'inactive');
+              getTemplate(tpls[e.target.dataset.to]).setAttribute('state', 'active');
+            };
+          });
+        </script>
+      </template>
+    </cells-demo-case>
+  </cells-demo-helper>
+
+</body>
+</html>

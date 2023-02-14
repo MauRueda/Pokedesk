@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "56a9fa2ba2e4ff7f205f52b3",
+    "index": 0,
+    "guid": "5ae318de-66c2-45b7-9b28-d4dae2926415",
+    "isActive": false,
+    "balance": "$3,456.64",
+    "picture": "http://placehold.it/32x32",
+    "age": 27,
+    "eyeColor": "blue",
+    "name": "James Goodwin",
+    "gender": "male",
+    "company": "AUTOGRATE",
+    "email": "jamesgoodwin@autograte.com",
+    "phone": "+1 (945) 503-3760",
+    "address": "259 Grove Street, Cliffside, Pennsylvania, 1010",
+    "about": "Fugiat Lorem ad sint amet irure consectetur qui esse anim enim voluptate qui excepteur. Nisi ad esse adipisicing non anim quis dolor minim. Labore fugiat consectetur esse officia nostrud laboris in aliquip cillum. Deserunt dolore veniam ut elit consequat fugiat enim dolor dolor amet do laborum. Dolor sunt dolore pariatur ut do ut dolore exercitation quis elit commodo enim ex. Ex laborum pariatur aliqua Lorem id. Dolor id irure exercitation ad.\r\n",
+    "registered": "2016-01-25T12:36:17 -01:00",
+    "latitude": 7.242854,
+    "longitude": -151.683787,
+    "tags": [
+      "laborum",
+      "duis",
+      "pariatur",
+      "et",
+      "dolore",
+      "ea",
+      "ex"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Barnes Maddox"
+      },
+      {
+        "id": 1,
+        "name": "Lidia Yates"
+      },
+      {
+        "id": 2,
+        "name": "Anne Bowen"
+      }
+    ],
+    "greeting": "Hello, James Goodwin! You have 1 unread messages.",
+    "favoriteFruit": "banana"
+  },
+  {
+    "_id": "56a9fa2b8061fbb6e05af019",
+    "index": 1,
+    "guid": "f01c7399-5e5d-4d6f-a5b4-5585dfd1e3ee",
+    "isActive": true,
+    "balance": "$2,050.64",
+    "picture": "http://placehold.it/32x32",
+    "age": 31,
+    "eyeColor": "brown",
+    "name": "Odonnell Herrera",
+    "gender": "male",
+    "company": "SNOWPOKE",
+    "email": "odonnellherrera@snowpoke.com",
+    "phone": "+1 (903) 426-2188",
+    "address": "542 Havemeyer Street, Eggertsville, Vermont, 8026",
+    "about": "Anim ea magna nisi proident anim proident ea sunt non incididunt. Nulla dolore nisi dolore qui adipisicing nisi exercitation commodo quis culpa ut nulla. Mollit occaecat quis veniam dolor ea excepteur laboris cillum laboris excepteur irure sunt exercitation. Eu est elit excepteur voluptate eu tempor ullamco tempor do laboris sit eiusmod. Est qui nulla voluptate cillum dolore. Dolor minim est proident elit consectetur excepteur Lorem tempor deserunt mollit ex occaecat ullamco. Adipisicing quis esse quis ut est eiusmod.\r\n",
+    "registered": "2015-03-05T12:08:26 -01:00",
+    "latitude": 29.207939,
+    "longitude": -62.045601,
+    "tags": [
+      "qui",
+      "ex",
+      "sint",
+      "labore",
+      "adipisicing",
+      "ut",
+      "enim"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Sears Villarreal"
+      },
+      {
+        "id": 1,
+        "name": "Olsen Vega"
+      },
+      {
+        "id": 2,
+        "name": "Byrd Coleman"
+      }
+    ],
+    "greeting": "Hello, Odonnell Herrera! You have 7 unread messages.",
+    "favoriteFruit": "banana"
+  }
+]

@@ -1,0 +1,676 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>cells-app-drawer tests</title>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <link rel="import" href="../../polymer/polymer-element.html">
+  <link rel="import" href="../../polymer/lib/legacy/class.html">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../cells-app-drawer.html">
+</head>
+
+<body>
+
+  <test-fixture id="myEl">
+    <template>
+        <cells-app-drawer class="notransition">
+          <div drawer></div>
+          <div main></div>
+          <div footer></div>
+        </cells-app-drawer>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('methods', function() {
+
+      setup(function() {
+        myEl = fixture('myEl');
+      });
+
+      test('ready method', function(done) {
+        flush(function() {
+          expect(myEl._transition).to.be.true;
+          done();
+        });
+      });
+
+      suite('togglePanel method', function() {
+        let openDrawerSpy = null;
+        let closeDrawerSpy = null;
+
+        setup(function() {
+          openDrawerSpy = sinon.spy(myEl, 'openDrawer');
+          closeDrawerSpy = sinon.spy(myEl, 'closeDrawer');
+        });
+
+        teardown(function() {
+          openDrawerSpy.restore();
+          closeDrawerSpy.restore();
+        });
+
+        test('should open drawer', function() {
+
+          sinon.stub(myEl, '_isMainSelected', () => true);
+          myEl.togglePanel();
+
+          expect(openDrawerSpy).to.have.been.calledOnce;
+          expect(closeDrawerSpy).not.have.been.called;
+        });
+
+        test('should close drawer', function() {
+
+          sinon.stub(myEl, '_isMainSelected', () => false);
+          myEl.togglePanel();
+
+          expect(openDrawerSpy).not.have.been.called;
+          expect(closeDrawerSpy).to.have.been.calledOnce;
+        });
+
+      });
+
+      test('openDrawer method', function(done) {
+        sinon.stub(myEl, 'toggleClass', (type) => {
+          expect(type).to.be.eql('transition-drawer');
+          flush(function() {
+            expect(myEl.selected).to.be.eql('drawer');
+            done();
+          });
+        });
+
+        myEl.openDrawer();
+      });
+
+      test('closeDrawer method', function(done) {
+        sinon.stub(myEl, 'toggleClass', (type) => {
+          expect(type).to.be.eql('transition-drawer');
+          flush(function() {
+            expect(myEl.selected).to.be.eql('main');
+            done();
+          });
+
+        });
+
+        myEl.closeDrawer();
+      });
+
+      suite('_onTransitionEnd method', function() {
+        let toggleClassSpy = null;
+        let notifyResizeSpy = null;
+
+        setup(function() {
+          toggleClassSpy = sinon.stub(myEl, 'toggleClass');
+          notifyResizeSpy = sinon.stub(myEl, 'notifyResize');
+        });
+
+        teardown(function() {
+          toggleClassSpy.restore();
+          notifyResizeSpy.restore();
+        });
+
+        test('empty target', function() {
+          let getAutoFocusedNodeSpy = sinon.spy(myEl, '_getAutoFocusedNode');
+          myEl._onTransitionEnd({});
+          expect(toggleClassSpy).not.have.been.called;
+          expect(notifyResizeSpy).not.have.been.called;
+          expect(getAutoFocusedNodeSpy).not.have.been.called;
+        });
+
+        test('should call to notifyResize method when propertyName is left', function() {
+          let getAutoFocusedNodeSpy = sinon.spy(myEl, '_getAutoFocusedNode');
+
+          myEl._onTransitionEnd({ target: myEl, propertyName: 'left' });
+
+          expect(toggleClassSpy).not.have.been.called;
+          expect(notifyResizeSpy).to.have.been.calledOnce;
+          expect(getAutoFocusedNodeSpy).not.have.been.called;
+        });
+
+        test('should call to notifyResize method when propertyName is right', function() {
+          let getAutoFocusedNodeSpy = sinon.spy(myEl, '_getAutoFocusedNode');
+
+          myEl._onTransitionEnd({ target: myEl, propertyName: 'right' });
+
+          expect(toggleClassSpy).not.have.been.called;
+          expect(notifyResizeSpy).to.have.been.calledOnce;
+          expect(getAutoFocusedNodeSpy).not.have.been.called;
+        });
+
+        test('should call to toggleClass method when propertyName is transform', function(done) {
+          let getAutoFocusedNodeSpy = sinon.stub(myEl, '_getAutoFocusedNode');
+
+          toggleClassSpy.restore();
+
+          sinon.stub(myEl, 'toggleClass', () => {
+            flush(function() {
+              expect(notifyResizeSpy).not.have.been.called;
+              expect(getAutoFocusedNodeSpy).not.have.been.called;
+              done();
+            });
+          });
+
+           myEl._onTransitionEnd({ target: myEl, propertyName: 'transform' });
+        });
+
+        test('should call to getAutoFocusedNode method when propertyName is transform and selected is drawer', function(done) {
+
+          sinon.stub(myEl, '_getAutoFocusedNode', function() {
+            flush(function() {
+              expect(toggleClassSpy).to.have.been.calledOnce;
+              expect(notifyResizeSpy).not.have.been.called;
+              done();
+            });
+          });
+
+          myEl.selected = 'drawer';
+          myEl._onTransitionEnd({ target: myEl, propertyName: 'transform' });
+        });
+      });
+
+      test('_computeIronSelectorClass method', function() {
+        expect(myEl._computeIronSelectorClass()).to.be.eql('left-drawer');
+        expect(myEl._computeIronSelectorClass(false, false, false, false, false)).to.be.eql('left-drawer');
+        expect(myEl._computeIronSelectorClass(true, true, true, true, true)).to.be.eql('dragging narrow-layout right-drawer transition peeking');
+      });
+
+      test('_computeDrawerStyle method', function() {
+        expect(myEl._computeDrawerStyle('1px')).to.be.eql('width:1px;');
+        expect(myEl._computeDrawerStyle('100%')).to.be.eql('width:100%;');
+      });
+
+      test('_computeMainStyle method', function() {
+        expect(myEl._computeMainStyle(true, true, '100%')).to.be.eql('left:0;right:;');
+        expect(myEl._computeMainStyle(false, true, '100%')).to.be.eql('left:0;right:100%;');
+        expect(myEl._computeMainStyle(false, false, '100%')).to.be.eql('left:100%;');
+        expect(myEl._computeMainStyle(true, false, '100%')).to.be.eql('left:0;');
+      });
+
+      test('_computeMediaQuery method', function() {
+        expect(myEl._computeMediaQuery(true, '200px')).to.be.empty;
+        expect(myEl._computeMediaQuery(false, '200px')).to.be.eql('(max-width: 200px)');
+      });
+
+      suite('_onTrack method', function() {
+        let trackStartSpy = null;
+        let trackXSpy = null;
+        let trackEndSpy = null;
+
+        setup(function() {
+          trackStartSpy = sinon.stub(myEl, '_trackStart');
+          trackXSpy = sinon.stub(myEl, '_trackX');
+          trackEndSpy = sinon.stub(myEl, '_trackEnd');
+        });
+
+        teardown(function() {
+          trackStartSpy.restore();
+          trackXSpy.restore();
+          trackEndSpy.restore();
+        });
+
+        test('should exit when is not sharedPanel same that current', function() {
+          let that = sharedPanel;
+          sharedPanel = {};
+          myEl._onTrack();
+          sharedPanel = that;
+          expect(trackStartSpy).not.have.been.called;
+          expect(trackXSpy).not.have.been.called;
+          expect(trackEndSpy).not.have.been.called;
+        });
+
+        test('should exit when is scaleContent', function() {
+          myEl.scaleContent = true;
+          myEl._onTrack();
+          expect(trackStartSpy).not.have.been.called;
+          expect(trackXSpy).not.have.been.called;
+          expect(trackEndSpy).not.have.been.called;
+        });
+
+        test('should not execute any track when is not event state', function() {
+          myEl._onTrack({detail: {state: ''}});
+          expect(trackStartSpy).not.have.been.called;
+          expect(trackXSpy).not.have.been.called;
+          expect(trackEndSpy).not.have.been.called;
+        });
+
+        test('should execute _trackStart when event state is start', function() {
+          let that = sharedPanel;
+          sharedPanel = null;
+          myEl._onTrack({detail: {state: 'start'}});
+          sharedPanel = that;
+          expect(trackStartSpy).to.have.been.calledOnce;
+          expect(trackXSpy).not.have.been.called;
+          expect(trackEndSpy).not.have.been.called;
+        });
+
+        test('should execute _trackX when event state is track', function() {
+          let that = sharedPanel;
+          sharedPanel = null;
+          myEl._onTrack({detail: {state: 'track'}});
+          sharedPanel = that;
+          expect(trackStartSpy).not.have.been.called;
+          expect(trackXSpy).to.have.been.calledOnce;
+          expect(trackEndSpy).not.have.been.called;
+        });
+
+        test('should execute _trackEnd when event state is end', function() {
+          let that = sharedPanel;
+          sharedPanel = null;
+          myEl._onTrack({detail: {state: 'end'}});
+          sharedPanel = that;
+          expect(trackStartSpy).not.have.been.called;
+          expect(trackXSpy).not.have.been.called;
+          expect(trackEndSpy).to.have.been.calledOnce;
+        });
+      });
+
+      suite('_responsiveChange method', function() {
+        let setNarrowSpy = null;
+        let setScrollDirectionSpy = null;
+        let listener = null;
+
+        setup(function() {
+          listener = sinon.spy();
+          setNarrowSpy = sinon.spy(myEl, '_setNarrow');
+          setScrollDirectionSpy = sinon.spy(myEl, 'setScrollDirection');
+          myEl.addEventListener('cells-app-responsive-change', listener);
+        });
+
+        teardown(function() {
+          setNarrowSpy.restore();
+          setScrollDirectionSpy.restore();
+          myEl.removeEventListener('cells-app-responsive-change', listener);
+        });
+
+        test('when is narrow', function() {
+          myEl._responsiveChange(true);
+          expect(myEl.selected).to.be.eql(myEl.defaultSelected);
+          expect(setNarrowSpy).to.have.been.calledOnce;
+          expect(setScrollDirectionSpy).to.have.been.calledOnce;
+          expect(listener).to.have.been.calledOnce;
+        });
+
+        test('when is not narrow', function() {
+          myEl._responsiveChange(false);
+          expect(myEl.selected).to.be.null;
+          expect(setNarrowSpy).to.have.been.calledOne;
+          expect(setScrollDirectionSpy).to.have.been.calledOnce;
+          expect(listener).to.have.been.calledOnce;
+        });
+      });
+
+      test('_startEdgePeek method', function() {
+        let moveDrawerSpy = sinon.stub(myEl, '_moveDrawer');
+        let translateXForDeltaXSpy = sinon.stub(myEl, '_translateXForDeltaX');
+        myEl._startEdgePeek();
+        expect(myEl.width).to.be.eql(myEl.$.drawer.offsetWidth);
+        expect(moveDrawerSpy).to.have.been.calledOnce;
+        expect(translateXForDeltaXSpy).to.have.been.calledOnce;
+      });
+
+      suite('_stopEdgePeek method', function() {
+
+        test('is not peeking', function() {
+          let moveDrawerSpy = sinon.stub(myEl, '_moveDrawer');
+
+          myEl._setPeeking(false);
+          myEl._stopEdgePeek();
+
+          expect(moveDrawerSpy).not.have.been.called;
+        });
+
+        test('is peeking', function() {
+          let moveDrawer = (value) => {
+            expect(value).to.be.null;
+          };
+
+          sinon.stub(myEl, '_moveDrawer', moveDrawer);
+
+          myEl._setPeeking(true);
+          myEl._stopEdgePeek();
+        });
+      });
+
+      suite('_downHandler method', function() {
+        let startEdgePeekSpy = null;
+
+        setup(function() {
+          startEdgePeekSpy = sinon.stub(myEl, '_startEdgePeek');
+        });
+
+        teardown(function() {
+          startEdgePeekSpy.restore();
+        });
+
+        test('is dragging', function() {
+          myEl._setDragging(true);
+          myEl._downHandler();
+          expect(startEdgePeekSpy).not.have.been.called;
+          expect(sharedPanel).to.be.null;
+        });
+
+        test('is not dragging and main is not selected', function() {
+          sinon.stub(myEl, '_isMainSelected', () => false);
+          myEl._setDragging(false);
+          myEl._downHandler();
+          expect(startEdgePeekSpy).not.have.been.called;
+          expect(sharedPanel).to.be.null;
+        });
+
+        test('is not dragging and main is selected and is not edge touch', function() {
+          sinon.stub(myEl, '_isMainSelected', () => true);
+          sinon.stub(myEl, '_isEdgeTouch', () => false);
+          myEl._setDragging(false);
+          myEl._downHandler();
+          expect(startEdgePeekSpy).not.have.been.called;
+          expect(sharedPanel).to.be.null;
+        });
+
+        test('is not dragging and main is selected and is edge touch and is not sharedPanel', function() {
+          let that = sharedPanel;
+          sinon.stub(myEl, '_isMainSelected', () => true);
+          sinon.stub(myEl, '_isEdgeTouch', () => true);
+          sharedPanel = {};
+          myEl._downHandler();
+          myEl._setDragging(false);
+          sharedPanel = that;
+          expect(startEdgePeekSpy).not.have.been.called;
+        });
+
+        test('is not dragging and main is selected and is edge touch', function() {
+          sinon.stub(myEl, '_isMainSelected', () => true);
+          sinon.stub(myEl, '_isEdgeTouch', () => true);
+          myEl.peek = true;
+          myEl._setDragging(false);
+          myEl._downHandler(new CustomEvent(event));
+          expect(startEdgePeekSpy).to.have.been.calledOnce;
+          expect(sharedPanel).not.be.null;
+        });
+      });
+
+      suite('_trackStart method', function() {
+        let setDraggingSpy = null;
+        let isEdgeTouchSpy = null;
+
+        setup(function() {
+          setDraggingSpy = sinon.spy(myEl, '_setDragging');
+          isEdgeTouchSpy = sinon.stub(myEl, '_isEdgeTouch', () => true);
+        });
+
+        teardown(function() {
+          setDraggingSpy.restore();
+          isEdgeTouchSpy.restore();
+        });
+
+        test('not swipe allow', function() {
+          sinon.stub(myEl, '_swipeAllowed', () => false);
+          myEl._trackStart();
+          expect(setDraggingSpy).not.have.been.called;
+          expect(isEdgeTouchSpy).not.have.been.called;
+        });
+
+        test('swipe allow and main not selected', function() {
+          sinon.stub(myEl, '_swipeAllowed', () => true);
+          sinon.stub(myEl, '_isMainSelected', () => false);
+
+          myEl._trackStart();
+
+          expect(setDraggingSpy).to.have.been.calledOnce;
+          expect(isEdgeTouchSpy).not.have.been.called;
+          expect(myEl.width).to.be.eql(myEl.$.drawer.offsetWidth);
+          expect(myEl._transition).to.be.false;
+        });
+
+        test('swipe allow and main selected', function() {
+          sinon.stub(myEl, '_swipeAllowed', () => true);
+          sinon.stub(myEl, '_isMainSelected', () => true);
+
+          myEl._trackStart();
+
+          expect(setDraggingSpy).to.have.been.calledTwice;
+          expect(isEdgeTouchSpy).to.have.been.calledOnce;
+          expect(myEl.width).to.be.eql(myEl.$.drawer.offsetWidth);
+          expect(myEl._transition).to.be.false;
+        });
+      });
+
+      suite('_translateXForDeltaX method', function() {
+        const deltaX = 10;
+
+        test('should return the max value when is main selected and is right drawer', function() {
+          sinon.stub(myEl, '_isMainSelected', () => true);
+
+          myEl.set('width', 10);
+          myEl.set('rightDrawer', true);
+          expect(myEl._translateXForDeltaX(deltaX)).to.be.eql(myEl.width + deltaX);
+        });
+
+        test('should return the max value when is not main selected and is right drawer', function() {
+          sinon.stub(myEl, '_isMainSelected', () => false);
+
+          myEl.set('width', 10);
+          myEl.set('rightDrawer', true);
+          expect(myEl._translateXForDeltaX(deltaX)).to.be.eql(deltaX);
+        });
+
+        test('should return the min value when is main selected and is not right drawer', function() {
+          sinon.stub(myEl, '_isMainSelected', () => true);
+
+          myEl.set('width', 10);
+          myEl.set('rightDrawer', false);
+          expect(myEl._translateXForDeltaX(deltaX)).to.be.eql(0);
+        });
+
+        test('should return the min value when is not main selected and is not right drawer', function() {
+          sinon.stub(myEl, '_isMainSelected', () => false);
+
+          myEl.set('width', 10);
+          myEl.set('rightDrawer', false);
+          expect(myEl._translateXForDeltaX(deltaX)).to.be.eql(0);
+        });
+      });
+
+      suite('_trackX method', function() {
+        let moveDrawerSpy = null;
+        let translateXForDeltaXSpy = null;
+
+        setup(function() {
+          moveDrawerSpy = sinon.stub(myEl, '_moveDrawer');
+          translateXForDeltaXSpy = sinon.stub(myEl, '_translateXForDeltaX');
+        });
+
+        teardown(function() {
+          moveDrawerSpy.restore();
+          translateXForDeltaXSpy.restore();
+        });
+
+        test('should exit when is not dragging', function() {
+          myEl._setDragging(false);
+          myEl._trackX();
+          expect(moveDrawerSpy).not.have.been.called;
+          expect(translateXForDeltaXSpy).not.have.been.called;
+        });
+
+        test('should move drawer when is dragging and is not peeking', function() {
+          myEl._setDragging(true);
+          myEl._setPeeking(false);
+          myEl._trackX({detail: {dx: 0}});
+          expect(moveDrawerSpy).to.have.been.calledOnce;
+          expect(translateXForDeltaXSpy).to.have.been.calledOnce;
+        });
+
+        test('should move drawer when is dragging and is peeking and mayor than edgeSwipeSensitivity', function() {
+          myEl._setDragging(true);
+          myEl._setPeeking(true);
+          myEl.set('edgeSwipeSensitivity', 10);
+          myEl._trackX({detail: {dx: 20}});
+          expect(moveDrawerSpy).to.have.been.calledOnce;
+          expect(translateXForDeltaXSpy).to.have.been.calledOnce;
+          expect(myEl.peeking).to.be.false;
+        });
+
+        test('should exit when is dragging and is peeking and minor than edgeSwipeSensitivity', function() {
+          myEl._setDragging(true);
+          myEl._setPeeking(true);
+          myEl._trackX({detail: {dx: 0}});
+          expect(moveDrawerSpy).not.have.been.called;
+          expect(translateXForDeltaXSpy).not.have.been.called;
+          expect(myEl.peeking).to.be.true;
+        });
+      });
+
+      suite('_trackEnd method', function() {
+        let moveDrawerSpy = null;
+        let openDrawerSpy = null;
+        let closeDrawerSpy = null;
+
+        setup(function() {
+          moveDrawerSpy = sinon.stub(myEl, '_moveDrawer');
+          openDrawerSpy = sinon.stub(myEl, 'openDrawer');
+          closeDrawerSpy = sinon.stub(myEl, 'closeDrawer');
+        });
+
+        teardown(function() {
+          moveDrawerSpy.restore();
+          openDrawerSpy.restore();
+          closeDrawerSpy.restore();
+        });
+
+        test('should exit when is not dragging', function() {
+          myEl._setDragging(false);
+          myEl._trackEnd();
+          expect(moveDrawerSpy).not.have.been.called;
+          expect(openDrawerSpy).not.have.been.called;
+          expect(closeDrawerSpy).not.have.been.called;
+        });
+
+        test('should open drawer when is dragging and is right drawer and is not x axis direction', function() {
+          myEl._setDragging(true);
+          myEl.set('rightDrawer', true);
+          myEl._trackEnd({detail: {dx: 0}});
+          expect(moveDrawerSpy).to.have.been.calledOnce;
+          expect(openDrawerSpy).to.have.been.calledOnce;
+          expect(closeDrawerSpy).not.have.been.called;
+        });
+
+        test('should close drawer when is dragging and is right drawer and is x axis direction', function() {
+          myEl._setDragging(true);
+          myEl.set('rightDrawer', true);
+          myEl._trackEnd({detail: {dx: 1}});
+          expect(moveDrawerSpy).to.have.been.calledOnce;
+          expect(openDrawerSpy).not.have.been.called;
+          expect(closeDrawerSpy).to.have.been.calledOnce;
+        });
+
+        test('should open drawer when is dragging and is not right drawer and is not x axis direction', function() {
+          myEl._setDragging(true);
+          myEl.set('rightDrawer', false);
+          myEl._trackEnd({detail: {dx: 0}});
+          expect(moveDrawerSpy).to.have.been.calledOnce;
+          expect(openDrawerSpy).not.have.been.called;
+          expect(closeDrawerSpy).to.have.been.calledOnce;
+        });
+
+        test('should close drawer when is dragging and is not right drawer and is x axis direction', function() {
+          myEl._setDragging(true);
+          myEl.set('rightDrawer', false);
+          myEl._trackEnd({detail: {dx: 1}});
+          expect(moveDrawerSpy).to.have.been.calledOnce;
+          expect(openDrawerSpy).to.have.been.calledOnce;
+          expect(closeDrawerSpy).not.have.been.called;
+        });
+      });
+
+      suite('_transformForTranslateX method', function() {
+
+        test('should return empty when translate is empty', function() {
+          expect(myEl._transformForTranslateX(null)).to.be.empty;
+        });
+
+        test('should return translate when translate is not empty and is not scale content', function() {
+          myEl.set('width', 10);
+          myEl.set('scaleContent', false);
+          expect(myEl._transformForTranslateX(1)).to.be.eql('translateX(1px)');
+        });
+
+        test('should return scale translate when translate is not empty and is scale content', function() {
+          myEl.set('width', 10);
+          myEl.set('scaleContent', true);
+          expect(myEl._transformForTranslateX(3)).to.be.eql('scale(0.558) translateX(123.5vw)');
+        });
+      });
+
+      suite('_toggleFocusListener method', function() {
+        let listener = null;
+
+        setup(function() {
+          listener = sinon.stub(myEl, '_didFocus');
+        });
+
+        teardown(function() {
+          listener.restore();
+        });
+
+        test('should add focus event listener if drawer is selected', function() {
+          myEl._toggleFocusListener('drawer');
+          myEl.dispatchEvent(new CustomEvent('focus'));
+          expect(listener).to.have.been.calledOnce;
+        });
+
+        test('should remove focus event listener if drawer is selected', function() {
+          myEl._toggleFocusListener('main');
+          myEl.dispatchEvent(new CustomEvent('focus'));
+          expect(listener).not.have.been.called;
+        });
+      });
+
+      suite('_didFocus method', function() {
+        let getDrawerContentSpy = null;
+
+        setup(function() {
+          getDrawerContentSpy = sinon.stub(myEl, '_getDrawerContent', () => 'drawerContent');
+        });
+
+        teardown(function() {
+          getDrawerContentSpy.restore();
+        });
+
+        test('should exit if node is not auto', function() {
+          sinon.stub(myEl, '_getAutoFocusedNode', () => null);
+          myEl._didFocus();
+          expect(getDrawerContentSpy).not.have.been.called;
+        });
+
+        test('should not autofocus if child from driver is focused ', function() {
+          let focus = sinon.spy();
+
+          sinon.stub(myEl, '_getAutoFocusedNode', () => {return {focus: focus}});
+          myEl._didFocus(new CustomEvent('event'));
+          expect(getDrawerContentSpy).to.have.been.calledOnce;
+          expect(focus).to.have.been.called;
+        });
+      });
+
+      test('_isDrawerClosed method', function() {
+        expect(myEl._isDrawerClosed(true, 'main')).to.be.true;
+        expect(myEl._isDrawerClosed(false, 'main')).to.be.true;
+        expect(myEl._isDrawerClosed(true, 'drawer')).to.be.false;
+        expect(myEl._isDrawerClosed(false, 'drawer')).to.be.true;
+      });
+    });
+  </script>
+</body>
+</html>

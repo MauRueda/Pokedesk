@@ -1,0 +1,456 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no" name="viewport">
+  <script>
+    window.Polymer = {
+      dom: 'shadow',
+      lazyRegister: true,
+      useNativeCSSProperties: true
+    };
+  </script>
+  <title>Cells template paper drawer panel demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../cells-demo-helper/cells-demo-helper.html">
+  <link rel="lazy-import" href="../../polymer/polymer.html">
+  <link rel="lazy-import" href="../cells-template-paper-drawer-panel.html">
+  <link rel="lazy-import" href="css/custom-style.html">
+</head>
+
+<body unresolved style="margin: 0;">
+
+  <cells-demo-helper>
+    <cells-demo-case heading="basic">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <custom-style>
+              <style is="custom-style">
+                cells-template-paper-drawer-panel {
+                  --cells-template-paper-drawer-panel-header: {
+                    background-color: rgba(255, 255, 255, 1);
+                    border-bottom: 1px solid rgba(180, 192, 227, 1);
+                    min-height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  --cells-template-paper-drawer-panel-main: {
+                    padding: 0 1em;
+                    box-sizing: border-box;
+                  }
+                }
+              </style>
+            </custom-style>
+              <cells-template-paper-drawer-panel state="active" disable-swipe>
+                <div slot="app__header">
+                  Header
+                </div>
+                <div slot="app__main">
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                </div>
+              </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="Header fixed" description="Use the property header-fixed">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <custom-style>
+              <style is="custom-style">
+                cells-template-paper-drawer-panel {
+                  --cells-template-paper-drawer-panel-header: {
+                    background-color: rgba(255, 255, 255, 1);
+                    border-bottom: 1px solid rgba(180, 192, 227, 1);
+                    min-height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  --cells-template-paper-drawer-panel-main: {
+                    padding: 0 1em;
+                    box-sizing: border-box;
+                  }
+                }
+              </style>
+            </custom-style>
+              <cells-template-paper-drawer-panel header-fixed state="active">
+                <div slot="app__header">
+                  Header
+                </div>
+                <div slot="app__main">
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                </div>
+              </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="Header hidden" description="Use the property header-hidden">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <custom-style>
+              <style is="custom-style">
+                cells-template-paper-drawer-panel {
+                  --cells-template-paper-drawer-panel-header: {
+                    background-color: rgba(255, 255, 255, 1);
+                    border-bottom: 1px solid rgba(180, 192, 227, 1);
+                    min-height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  --cells-template-paper-drawer-panel-main: {
+                    padding: 0 1em;
+                    box-sizing: border-box;
+                  }
+                }
+              </style>
+            </custom-style>
+              <cells-template-paper-drawer-panel header-hidden state="active">
+                <div slot="app__header">
+                  Header
+                </div>
+                <div slot="app__main">
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                </div>
+              </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="With footer No Fixed">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <custom-style>
+              <style is="custom-style">
+                cells-template-paper-drawer-panel {
+                  --cells-template-paper-drawer-panel-header: {
+                    background-color: rgba(255, 255, 255, 1);
+                    border-bottom: 1px solid rgba(180, 192, 227, 1);
+                    min-height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  --cells-template-paper-drawer-panel-main: {
+                    padding: 0 1em;
+                    box-sizing: border-box;
+                  }
+                  --cells-template-paper-drawer-panel-footer: {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-top: 1px solid rgba(180, 192, 227, 1);
+                  }
+                }
+              </style>
+            </custom-style>
+              <cells-template-paper-drawer-panel state="active" has-footer>
+                <div slot="app__header">
+                  Header
+                </div>
+                <div slot="app__main">
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                </div>
+                <div slot="app__footer">
+                  Footer
+                </div>
+              </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="With footer Fixed">
+      <template>
+        <dom-bind>
+          <template is="dom-bind">
+            <custom-style>
+              <style is="custom-style">
+                cells-template-paper-drawer-panel {
+                  --cells-template-paper-drawer-panel-header: {
+                    background-color: rgba(255, 255, 255, 1);
+                    border-bottom: 1px solid rgba(180, 192, 227, 1);
+                    min-height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  --cells-template-paper-drawer-panel-main: {
+                    padding: 0 1em;
+                    box-sizing: border-box;
+                  }
+                  --cells-template-paper-drawer-panel-footer: {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-top: 1px solid rgba(180, 192, 227, 1);
+                  }
+                }
+              </style>
+            </custom-style>
+              <cells-template-paper-drawer-panel state="active" footer-fixed>
+                <div slot="app__header">
+                  Header
+                </div>
+                <div slot="app__main">
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                </div>
+                <div slot="app__footer">
+                  Footer
+                </div>
+              </cells-template-paper-drawer-panel>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="With drawer" description="Click in button to open the left drawer">
+      <template>
+        <dom-bind>
+          <template is="dom-bind" id="demo">
+            <custom-style>
+              <style is="custom-style">
+                cells-template-paper-drawer-panel {
+                  --cells-template-paper-drawer-panel-header: {
+                    background-color: rgba(255, 255, 255, 1);
+                    border-bottom: 1px solid rgba(180, 192, 227, 1);
+                    min-height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  --cells-template-paper-drawer-panel-main: {
+                    padding: 1em 1em;
+                    box-sizing: border-box;
+                  }
+                  --cells-template-paper-drawer-panel-complementary: {
+                    background-color: #FAFAFF;
+                  }
+                }
+              </style>
+            </custom-style>
+              <cells-template-paper-drawer-panel state="active" scale-content id="drawerPanel">
+                <div slot="app__header">
+                  Header
+                </div>
+                <div slot="app__main">
+                  <button class="button" on-click="toggleMenu">
+                      _toggleButton
+                  </button>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                </div>
+                <div slot="app__complementary">
+                  <ul>
+                    <li>Menu 1</li>
+                    <li>Menu 2</li>
+                    <li>Menu 3</li>
+                    <li>Menu 4</li>
+                    <li>Menu 5</li>
+                  </ul>
+                </div>
+              </cells-template-paper-drawer-panel>
+              <script type="text/javascript">
+                document.addEventListener('WebComponentsReady', function() {
+                  var demo = document.querySelector(Polymer.Element ? 'dom-bind' : '#demo');
+                  demo.toggleMenu = function() {
+                    demo.$.drawerPanel.toggleMenu();
+                  };
+                });
+              </script>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="With right drawer" description="Click in button to open the right drawer">
+      <template>
+        <dom-bind>
+          <template is="dom-bind" id="demo2">
+            <custom-style>
+              <style is="custom-style">
+                cells-template-paper-drawer-panel {
+                  --cells-template-paper-drawer-panel-header: {
+                    background-color: rgba(255, 255, 255, 1);
+                    border-bottom: 1px solid rgba(180, 192, 227, 1);
+                    min-height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                  --cells-template-paper-drawer-panel-main: {
+                    padding: 1em 1em;
+                    box-sizing: border-box;
+                  }
+                  --cells-template-paper-drawer-panel-complementary: {
+                    background-color: #FAFAFF;
+                  }
+                }
+              </style>
+            </custom-style>
+              <cells-template-paper-drawer-panel id="drawerPanel" state="active" scale-content right-drawer>
+                <div slot="app__header">
+                  Header
+                </div>
+                <div slot="app__main">
+                  <div style="text-align: right">
+                  <button class="button" on-click="toggleMenu">
+                      _toggleButton
+                  </button>
+                </div>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                </div>
+                <div slot="app__complementary">
+                  <ul style="text-align: right; padding-right: 2.2em">
+                    <li>Menu 1</li>
+                    <li>Menu 2</li>
+                    <li>Menu 3</li>
+                    <li>Menu 4</li>
+                    <li>Menu 5</li>
+                  </ul>
+                </div>
+              </cells-template-paper-drawer-panel>
+              <script type="text/javascript">
+                document.addEventListener('WebComponentsReady', function() {
+                  var demo = document.querySelector(Polymer.Element ? 'dom-bind' : '#demo2');
+                  demo.toggleMenu = function() {
+                    demo.$.drawerPanel.toggleMenu();
+                  };
+                });
+              </script>
+          </template>
+        </dom-bind>
+      </template>
+    </cells-demo-case>
+    <cells-demo-case heading="With drawer Off Canvas" description="Click in button to open the left drawer">
+        <template>
+          <dom-bind>
+            <template is="dom-bind" id="demo">
+              <custom-style>
+                <style is="custom-style">
+                  cells-template-paper-drawer-panel {
+                    --cells-template-paper-drawer-panel-header: {
+                      background-color: rgba(255, 255, 255, 1);
+                      border-bottom: 1px solid rgba(180, 192, 227, 1);
+                      min-height: 60px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                    }
+                    --cells-template-paper-drawer-panel-main: {
+                      padding: 1em 1em;
+                      box-sizing: border-box;
+                    }
+                    --cells-template-paper-drawer-panel-complementary: {
+                      background-color: #FAFAFF;
+                    }
+                  }
+                </style>
+              </custom-style>
+                <cells-template-paper-drawer-panel id="drawerPanel"  state="active" drawer-width="66%">
+                  <div slot="app__header">
+                    Header
+                  </div>
+                  <div slot="app__main">
+                    <button class="button" on-click="toggleMenu">
+                        _toggleButton
+                    </button>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, minus asperiores obcaecati quo ullam, ea eaque iusto cum, exercitationem amet culpa in fugiat quibusdam facilis? Totam temporibus sunt officia facere.</p>
+                  </div>
+                  <div slot="app__complementary">
+                    <ul>
+                      <li>Menu 1</li>
+                      <li>Menu 2</li>
+                      <li>Menu 3</li>
+                      <li>Menu 4</li>
+                      <li>Menu 5</li>
+                    </ul>
+                  </div>
+                </cells-template-paper-drawer-panel>
+                <script type="text/javascript">
+                  document.addEventListener('WebComponentsReady', function() {
+                    var demo = document.querySelector(Polymer.Element ? 'dom-bind' : '#demo');
+                    demo.toggleMenu = function() {
+                      demo.$.drawerPanel.toggleMenu();
+                    };
+                  });
+                </script>
+            </template>
+          </dom-bind>
+        </template>
+      </cells-demo-case>
+  </cells-demo-helper>
+</body>
+
+</html>

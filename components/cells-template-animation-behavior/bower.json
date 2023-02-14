@@ -1,0 +1,27 @@
+{
+  "name": "cells-template-animation-behavior",
+  "version": "11.0.1",
+  "description": "Behavior to manage template animations",
+  "keywords": [
+    "animation",
+    "template",
+    "behavior"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
+    "web-component-tester": "^6.0.0",
+    "cells-template-paper-drawer-panel": "^11.0.0",
+    "cells-demo-helper": "^10.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "main": [
+    "cells-template-animation-behavior.html",
+    "docs.html"
+  ],
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  }
+}
