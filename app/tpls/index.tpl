@@ -8,7 +8,7 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>pokedesk</title>
+  <title>testApp2</title>
   <!-- Place favicon.ico in the `app/` directory -->
 
   <!-- Chrome for Android theme color -->
@@ -23,16 +23,16 @@
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="staticScaffold">
-  <link rel="icon" sizes="192x192" href="resources/images/touch/chrome-touch-icon-192x192.png">
+  <link rel="icon" sizes="192x192" href="resources/images/touch/favicon.ico">
 
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="staticScaffold">
-  <link rel="apple-touch-icon" href="resources/images/touch/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="resources/images/touch/favicon.ico">
 
   <!-- Tile icon for Win8 (144x144) -->
-  <meta name="msapplication-TileImage" content="resources/images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileImage" content="resources/images/touch/favicon.ico">
 
   <link rel="stylesheet" href="styles/main.css">
   <script>
