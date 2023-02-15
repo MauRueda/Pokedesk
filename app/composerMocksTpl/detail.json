@@ -16,46 +16,28 @@
       "render": "litElement",
       "properties": {
         "icon-left-primary": "bbva:return",
-        "text": "Mi lista de pokemons"
+        "text": "Estadisticas"
       }
     },
     {
       "zone": "app__main",
       "type": "DM",
-      "familyPath": "../pokemon-dm",
-      "tag": "pokemon-dm",
+      "familyPath": "../pokemon-detail-dm",
+      "tag": "pokemon-detail-dm",
       "render": "litElement",
       "properties": {
         "cellsConnections": {
           "in": {
-            "list-pagination": {
-              "bind": "getPage"
+            "pokemon-detail": {
+              "bind": "getPokemonDetail"
             }
           },
           "out": {
-            "result-list": {
-              "bind": "firstData-event"
-            }
-          }
-        }
-      }
-    },
-    {
-      "zone": "app__main",
-      "type": "DM",
-      "familyPath": "../pokemon-list-dm",
-      "tag": "pokemon-list-dm",
-      "render": "litElement",
-      "properties": {
-        "cellsConnections": {
-          "in": {
-            "result-list": {
-              "bind": "getResults"
-            }
-          },
-          "out": {
-            "pokemon-list": {
-              "bind": "pokemon-list"
+            "pokemon-info": {
+              "bind": "detail-data-event"
+            },
+            "evolution-channel": {
+              "bind": "evolutions-info"
             }
           }
         }
@@ -64,24 +46,24 @@
     {
       "zone": "app__main",
       "type": "UI",
-      "familyPath": "../list-pokemon-elements",
-      "tag": "list-pokemon-elements",
+      "familyPath": "../detail-pokemon-element",
+      "tag": "detail-pokemon-element",
       "render": "litElement",
       "properties": {
         "cellsConnections": {
           "in": {
-            "pokemon-list": {
-              "bind": "dataPokeInfo"
+            "pokemon-info": {
+              "bind": "pokemonDetail"
+            },
+            "evolution-channel": {
+              "bind": "evolutions"
             }
           },
           "out": {
-            "list-pagination": {
-              "bind": "navigation-event"
-            },
-            "pokemon-detail": {
-              "bind": "detail-event",
+            "pokemon-evolution": {
+              "bind": "evolution-event",
               "link": {
-                "page": "detail"
+                "page": "evolution"
               }
             }
           }
