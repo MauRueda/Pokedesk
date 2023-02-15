@@ -7,3 +7,4 @@ import '@cells-components/coronita-icons/coronita-icons.js';
 import '@bbva-web-components/bbva-core-icon/bbva-core-icon.js';
 import '@cells-components/cells-template-paper-drawer-panel/cells-template-paper-drawer-panel';
 import '@bbva-web-components/bbva-header-main/bbva-header-main';
+import '@bbva-web-components/bbva-core-generic-dp/bbva-core-generic-dp.js';
